@@ -15,7 +15,7 @@ const DistanceForm = () => {
   //try catch fetch  request to api
   const getDistance = async () => {
     try {
-      const response = await axios.post('https://distance-api-google-0819f9e6af72.herokuapp.com/distance', {
+      const response = await axios.post('https://distance-app-google-3487e739ad8e.herokuapp.com/distance', {
         destinations,
         origins,
       });
