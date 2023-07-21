@@ -33,11 +33,19 @@ const DistanceForm = () => {
     setDistanceData(results);
   };
 
+  // delets input data once request is submitted
+  const resetDistance = async () => {
+    setDestinations("");
+    setOrigins("");
+
+  }
+
 
   //handles sumbit when button is clicked it fetches the data from api
   const handleSubmit = async (e) => {
     e.preventDefault();
     fetchDistance();
+    resetDistance();
   };
 
 // returns starts
