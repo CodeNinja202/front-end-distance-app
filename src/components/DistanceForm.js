@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './index.css';
+import Button from "react-bootstrap/Button";
 ////////////////////////////////////////////////////////////////
 
 
 const DistanceForm = () => {
 
-  // use stat hooks 
+  // use state hooks 
   const [destinations, setDestinations] = useState('');
   const [origins, setOrigins] = useState('');
   const [distanceData, setDistanceData] = useState(null);
@@ -34,7 +35,7 @@ const DistanceForm = () => {
     setDistanceData(results);
   };
 
-  // delets input data once request is submitted
+  // deletes input data once request is submitted
   const resetDistance = async () => {
     setDestinations("");
     setOrigins("");
@@ -49,16 +50,16 @@ const DistanceForm = () => {
     resetDistance();
   };
 
-// returns starts
+// return starts
   return (
-    <div className="container mt-4">
+    <div className="container mt-4" >
 
       <div className="card">
         <div className="card-body">
-          <h5 className="card-title">Distance Matrix API</h5>
+          <h5 className="card-title">Distance Matrix API RAW JSON DATA</h5>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="destinations">Destinations:</label>
+              <label htmlFor="destinations">Point A:</label>
               <input
                 type="text"
                 className="form-control"
@@ -69,7 +70,7 @@ const DistanceForm = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="origins">Origins:</label>
+              <label htmlFor="origins">Point B:</label>
               <input
                 type="text"
                 className="form-control"
@@ -79,13 +80,15 @@ const DistanceForm = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <Button type="submit" variant="dark">
               Get Distance Data
-            </button>
+            </Button>
           </form>
         </div>
       </div>
 
+
+{/* Returns table in bootstrap form */}
       {distanceData && (
         <div className="card mt-4">
           <div className="card-body">

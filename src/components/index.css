@@ -11,5 +11,8 @@ body {
   .table {
     color: #ddd;
   }
-  
+  label, input, .card-title {
+    color: #FFFFFF;
+  }
+ 
   /* add other styles as needed */

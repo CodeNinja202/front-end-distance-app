@@ -9,7 +9,7 @@ function App({destinations, origins}) {
       <h1>Distance Matrix API Form</h1>
       <DistanceForm />
 
-      <h1>CSV Data</h1> 
+      <h1>Import CSV Data</h1> 
       <ResponsiveExample /> 
     </div>
   );

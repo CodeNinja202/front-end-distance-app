@@ -8,6 +8,7 @@ import FormControl from "react-bootstrap/FormControl";
 import { Pie } from "react-chartjs-2";
 import { Chart, PieController, ArcElement, CategoryScale } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import Card from "react-bootstrap/Card";
 ////////////////////////////////////////////////////////////////
 
 function ResponsiveExample() {
@@ -19,6 +20,7 @@ function ResponsiveExample() {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("");
   const [destination, setDestination] = useState("");
+  const [isFileLoaded, setIsFileLoaded] = useState(false); // add this state
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [{ data: [], backgroundColor: [] }],
@@ -30,7 +32,7 @@ function ResponsiveExample() {
   // handles chart data
   const handleForce = (data, fileInfo) => {
     setData(data);
-
+    setIsFileLoaded(true);
     // Create a map with unique values in column 6 as keys and their count as values.
     const column6Count = new Map();
     data.forEach((row) => {
@@ -120,18 +122,24 @@ function ResponsiveExample() {
 
   return (
     <div className="main-div-table">
+      <Card>
+        <Card.Body>
       {/* imports a CSV File */}
       <CSVReader
         cssClass="csv-reader-input"
         label="Select CSV file"
         onFileLoaded={handleForce}
-        onError={() => alert("An error occurred reading the file")}
+        onError={() => {
+          alert("An error occurred reading the file");
+          setIsFileLoaded(false); // set the state to false when an error occurred
+        }}
         inputId="csvReader"
-        inputStyle={{ color: "red" }}
+        inputStyle={{ color: isFileLoaded ? "green" : "red" }} // conditional styling
       />
 
       {/* Input destination address to display distance and duration for each dynamic row in the table */}
       <FormControl
+   
         type="text"
         placeholder="Destination"
         className="mr-sm-2"
@@ -139,7 +147,7 @@ function ResponsiveExample() {
       />
 
       {/* onclick button that fecthes data from the api and returns duration and distance */}
-      <Button variant="outline-success" onClick={fetchAndSetData}>
+      <Button variant="dark" onClick={fetchAndSetData}>
         Get Distances and Durations
       </Button>
 
@@ -203,6 +211,8 @@ function ResponsiveExample() {
             ))}
         </tbody>
       </Table>
+      </Card.Body>
+      </Card>
     </div>
   );
 }
