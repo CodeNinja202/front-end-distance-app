@@ -178,17 +178,17 @@ function ResponsiveExample() {
       </div>
 
       {/* Search Form that searchs  returns data in CSV File */}
-      {/* <FormControl
+      <FormControl
         type="text"
         placeholder="Search"
         className="mr-sm-2"
         onChange={handleFilterChange}
-      /> */}
+      />
 
       {/* Search Button */}
-      {/* <Button variant="outline-success" onClick={fetchAndSetData}>
+      <Button variant="outline-success" onClick={fetchAndSetData}>
         Search
-      </Button> */}
+      </Button>
 
       {/* CSV Data Table  */}
 
