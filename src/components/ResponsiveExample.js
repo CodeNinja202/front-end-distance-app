@@ -145,8 +145,8 @@ function ResponsiveExample() {
           {/* Pie Chart */}
           <div
             style={{
-              width: "850px",
-              height: "850px",
+              width: "100%", // Use 100% so it uses the full width of its container
+              height: "50vh", // Use viewport height (vh) so it responds to the height of the screen
               margin: "0 auto", // This will center the div horizontally
             }}
           >
@@ -168,6 +168,7 @@ function ResponsiveExample() {
               }}
             />
           </div>
+
           {/* end pir chart */}
 
           {/* Search Form that searchs  returns data in CSV File */}

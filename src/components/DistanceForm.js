@@ -39,7 +39,6 @@ const DistanceForm = () => {
     const results = await getDistance();
     setDistanceData(results);
     setSecondButtonLoading(false);
-
   };
 
   // deletes input data once request is submitted
@@ -86,22 +85,27 @@ const DistanceForm = () => {
               />
             </div>
 
-            <Button type="submit" variant="dark" onClick={fetchDistance} disabled={isSecondButtonLoading}>
-  {isSecondButtonLoading ? (
-    <>
-      <Spinner
-        as="span"
-        animation="grow"
-        size="sm"
-        role="status"
-        aria-hidden="true"
-      />
-      Loading...
-    </>
-  ) : (
-    "Get Distance Data"
-  )}
-</Button>
+            <Button
+              type="submit"
+              variant="dark"
+              onClick={fetchDistance}
+              disabled={isSecondButtonLoading}
+            >
+              {isSecondButtonLoading ? (
+                <>
+                  <Spinner
+                    as="span"
+                    animation="grow"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  Loading...
+                </>
+              ) : (
+                "Get Distance Data"
+              )}
+            </Button>
           </form>
         </div>
       </div>
