@@ -205,7 +205,7 @@ function ResponsiveExample() {
           {/* Input destination address to display distance and duration for each dynamic row in the table */}
           <FormControl
             type="text"
-            placeholder="Search Destination"
+            placeholder="Input starting destination"
             className="mr-sm-2"
             onChange={handleDestinationChange}
           />
