@@ -9,6 +9,7 @@ import { Pie } from "react-chartjs-2";
 import { Chart, PieController, ArcElement, CategoryScale } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
 ////////////////////////////////////////////////////////////////
 
 function ResponsiveExample() {
@@ -18,6 +19,7 @@ function ResponsiveExample() {
 
   //usestate hooks
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   // const [filter, setFilter] = useState("");
   const [destination, setDestination] = useState("");
   const [isFileLoaded, setIsFileLoaded] = useState(false); // add this state
@@ -97,6 +99,7 @@ function ResponsiveExample() {
 
   // once data is fetched its sets it to the table and displays it on the browser
   const fetchAndSetData = async () => {
+    setIsLoading(true); // set loading to true at the start of data fetch
     const fetchedData = await Promise.all(
       data.map(async (row, index) => {
         const origin = `${row[row.length - 2]},${row[row.length - 1]}`; // use the last two columns as lat and long
@@ -112,8 +115,9 @@ function ResponsiveExample() {
         return [...row, distance, duration];
       })
     );
-
+    setDestination("");
     setData(fetchedData);
+    setIsLoading(false);
   };
   // when search componenet is uncommented it filters through the data for the inputed search field
   // const filteredData = () => {
@@ -180,8 +184,21 @@ function ResponsiveExample() {
       </Button> */}
 
           {/* onclick button that fecthes data from the api and returns duration and distance */}
-          <Button variant="dark" onClick={fetchAndSetData}>
-            Get Distances and Durations
+          <Button variant="dark" onClick={fetchAndSetData} disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                Loading...
+              </>
+            ) : (
+              "Get Distances and Durations"
+            )}
           </Button>
 
           {/* Input destination address to display distance and duration for each dynamic row in the table */}
