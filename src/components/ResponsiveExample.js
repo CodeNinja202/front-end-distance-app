@@ -18,7 +18,7 @@ function ResponsiveExample() {
 
   //usestate hooks
   const [data, setData] = useState([]);
-  const [filter, setFilter] = useState("");
+  // const [filter, setFilter] = useState("");
   const [destination, setDestination] = useState("");
   const [isFileLoaded, setIsFileLoaded] = useState(false); // add this state
   const [chartData, setChartData] = useState({
@@ -65,7 +65,7 @@ function ResponsiveExample() {
     });
   };
 
-  const handleFilterChange = (event) => setFilter(event.target.value);
+  // const handleFilterChange = (event) => setFilter(event.target.value);
   const handleDestinationChange = (event) => setDestination(event.target.value);
 
   //fetches the API endpoint
@@ -112,106 +112,108 @@ function ResponsiveExample() {
         return [...row, distance, duration];
       })
     );
+
     setData(fetchedData);
   };
-// when search componenet is uncommented it filters through the data for the inputed search field
-  const filteredData = () => {
-    if (!filter) return data;
-    return data.filter((row) => row.some((cell) => cell.includes(filter)));
-  };
+  // when search componenet is uncommented it filters through the data for the inputed search field
+  // const filteredData = () => {
+  //   if (!filter) return data;
+  //   return data.filter((row) => row.some((cell) => cell.includes(filter)));
+  // };
 
   return (
     <div className="main-div-table">
       <Card>
         <Card.Body>
-      {/* imports a CSV File */}
-      <CSVReader
-        cssClass="csv-reader-input"
-        label="Select CSV file"
-        onFileLoaded={handleForce}
-        onError={() => {
-          alert("An error occurred reading the file");
-          setIsFileLoaded(false); // set the state to false when an error occurred
-        }}
-        inputId="csvReader"
-        inputStyle={{ color: isFileLoaded ? "green" : "red" }} // conditional styling
-      />
+          {/* imports a CSV File */}
+          <CSVReader
+            cssClass="csv-reader-input"
+            label="Select CSV file"
+            onFileLoaded={handleForce}
+            onError={() => {
+              alert("An error occurred reading the file");
+              setIsFileLoaded(false); // set the state to false when an error occurred
+            }}
+            inputId="csvReader"
+            inputStyle={{ color: isFileLoaded ? "green" : "red" }} // conditional styling
+          />
 
-      {/* Input destination address to display distance and duration for each dynamic row in the table */}
-      <FormControl
-   
-        type="text"
-        placeholder="Destination"
-        className="mr-sm-2"
-        onChange={handleDestinationChange}
-      />
-
-      {/* onclick button that fecthes data from the api and returns duration and distance */}
-      <Button variant="dark" onClick={fetchAndSetData}>
-        Get Distances and Durations
-      </Button>
-
-      {/* Pie Chart */}
-      <div
-        style={{
-          width: "850px",
-          height: "850px",
-          margin: "0 auto", // This will center the div horizontally
-        }}
-      >
-        <Pie
-          data={chartData}
-          options={{
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              datalabels: {
-                formatter: function (value, context) {
-                  const label = context.chart.data.labels[context.dataIndex];
-                  return `${label} holes\n${value} total`;
+          {/* Pie Chart */}
+          <div
+            style={{
+              width: "850px",
+              height: "850px",
+              margin: "0 auto", // This will center the div horizontally
+            }}
+          >
+            <Pie
+              data={chartData}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  datalabels: {
+                    formatter: function (value, context) {
+                      const label =
+                        context.chart.data.labels[context.dataIndex];
+                      return `${label} holes\n${value} total`;
+                    },
+                    color: "#fff",
+                  },
                 },
-                color: "#fff",
-              },
-            },
-          }}
-        />
-      </div>
+              }}
+            />
+          </div>
+          {/* end pir chart */}
 
-      {/* Search Form that searchs  returns data in CSV File */}
-      <FormControl
+          {/* Search Form that searchs  returns data in CSV File */}
+          {/* <FormControl
         type="text"
         placeholder="Search"
         className="mr-sm-2"
         onChange={handleFilterChange}
-      />
+      /> */}
 
-      {/* Search Button */}
-      <Button variant="outline-success" onClick={fetchAndSetData}>
+          {/* Search Button */}
+          {/* <Button variant="outline-success" onClick={fetchAndSetData}>
         Search
-      </Button>
+      </Button> */}
 
-      {/* CSV Data Table  */}
+          {/* onclick button that fecthes data from the api and returns duration and distance */}
+          <Button variant="dark" onClick={fetchAndSetData}>
+            Get Distances and Durations
+          </Button>
 
-      <Table striped bordered hover responsive variant="dark">
-        <thead>
-          <tr>
-            {data[0] &&
-              data[0].map((heading, index) => <th key={index}>{heading}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData()
-            .slice(1)
-            .map((row, i) => (
-              <tr key={i}>
-                {row.map((cell, j) => (
-                  <td key={j}>{cell}</td>
-                ))}
+          {/* Input destination address to display distance and duration for each dynamic row in the table */}
+          <FormControl
+            type="text"
+            placeholder="Search Destination"
+            className="mr-sm-2"
+            onChange={handleDestinationChange}
+          />
+
+          {/* CSV Data Table  */}
+
+          <Table striped bordered hover responsive variant="dark">
+            <thead>
+              <tr>
+                {data[0] &&
+                  data[0].map((heading, index) => (
+                    <th key={index}>{heading}</th>
+                  ))}
               </tr>
-            ))}
-        </tbody>
-      </Table>
-      </Card.Body>
+            </thead>
+            <tbody>
+              {data.slice(1).map((row, i) => (
+                <tr key={i}>
+                  {row.map((cell, j) => (
+                    <td key={j}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Card.Body>
       </Card>
     </div>
   );
