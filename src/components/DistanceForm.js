@@ -20,7 +20,7 @@ const DistanceForm = () => {
   const getDistance = async () => {
     try {
       const response = await axios.post(
-        "https://distance-app-google-3487e739ad8e.herokuapp.com/distance",
+        "https://radiant-wildwood-27431-f72705ead57e.herokuapp.com/distance",
         {
           destinations,
           origins,

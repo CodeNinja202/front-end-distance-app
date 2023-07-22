@@ -73,7 +73,7 @@ function ResponsiveExample() {
   //fetches the API endpoint
   const fetchDistanceAndDuration = async (origin) => {
     const response = await fetch(
-      "https://distance-app-google-3487e739ad8e.herokuapp.com/distance",
+      "https://radiant-wildwood-27431-f72705ead57e.herokuapp.com/distance",
       {
         method: "POST",
         headers: {
