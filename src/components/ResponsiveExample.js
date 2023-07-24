@@ -141,43 +141,43 @@ function ResponsiveExample() {
     {
       name: "Baptist Center",
       miles: 134 ,
-      rating: 2,
+      rating: 75,
       
     },
     {
       name: "Ace Run",
       miles: 105 ,
-      rating: 2,
+      rating: 75,
       
     },
     {
       name: "City Park",
       miles: 	54.5  ,
-      rating: 5,
+      rating: 100,
       
     },
     {
       name: "Whitetail",
       miles: 	304 ,
-      rating: 5,
+      rating: 100,
       
     },
     {
       name: "Magnolia ",
       miles: 93.2 ,
-      rating: 5,
+      rating: 100,
       
     },
     {
       name: "Pa Davis ",
       miles: 102 ,
-      rating: 4,
+      rating: 85,
       
     },
     {
       name: "Summerfield",
       miles: 2.8 ,
-      rating: 5,
+      rating: 100,
       
     },
   
