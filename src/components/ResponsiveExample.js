@@ -10,6 +10,17 @@ import { Chart, PieController, ArcElement, CategoryScale } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
+import {
+  Bar,
+  Legend,
+  BarChart,
+  AreaChart,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Area,
+} from "recharts";
 ////////////////////////////////////////////////////////////////
 
 function ResponsiveExample() {
@@ -34,6 +45,7 @@ function ResponsiveExample() {
   // handles chart data
   const handleForce = (data, fileInfo) => {
     setData(data);
+
     setIsFileLoaded(true);
     // Create a map with unique values in column 6 as keys and their count as values.
     const column6Count = new Map();
@@ -125,6 +137,51 @@ function ResponsiveExample() {
   //   return data.filter((row) => row.some((cell) => cell.includes(filter)));
   // };
 
+  const data1 = [
+    {
+      name: "Baptist Center",
+      miles: 134 ,
+      rating: 2,
+      
+    },
+    {
+      name: "Ace Run",
+      miles: 105 ,
+      rating: 2,
+      
+    },
+    {
+      name: "City Park",
+      miles: 	54.5  ,
+      rating: 5,
+      
+    },
+    {
+      name: "Whitetail",
+      miles: 	304 ,
+      rating: 5,
+      
+    },
+    {
+      name: "Magnolia ",
+      miles: 93.2 ,
+      rating: 5,
+      
+    },
+    {
+      name: "Pa Davis ",
+      miles: 102 ,
+      rating: 4,
+      
+    },
+    {
+      name: "Summerfield",
+      miles: 2.8 ,
+      rating: 5,
+      
+    },
+  
+  ];
   return (
     <div className="main-div-table">
       <Card>
@@ -142,14 +199,85 @@ function ResponsiveExample() {
             inputStyle={{ color: isFileLoaded ? "green" : "red" }} // conditional styling
           />
 
+          {/* Search Form that searchs  returns data in CSV File */}
+          {/* <FormControl
+        type="text"
+        placeholder="Search"
+        className="mr-sm-2"
+        onChange={handleFilterChange}
+      /> */}
+      {isFileLoaded && (
+          <div style={{ display: "flex" }}>
+            {/* Line Chart */}
+            <div style={{ width: "50%" }}>
+            <h1 style={{ color:"white"}}>Ross's Top 7 courses in LA</h1>
+             
+             
+              <AreaChart
+                style={{ background: "black" }}
+                width={730}
+                height={250}
+                data={data1}
+                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+              >
+               
+                <defs>
+                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                  </linearGradient>
+                  <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" />
+                <Tooltip />
+                <Area
+                  type="monotone"
+                  dataKey="miles"
+                  stroke="#8884d8"
+                  fillOpacity={1}
+                  fill="url(#colorUv)"
+                />
+                <Area
+                  type="monotone"
+                  dataKey="rating"
+                  stroke="#82ca9d"
+                  fillOpacity={1}
+                  fill="url(#colorPv)"
+                />
+              </AreaChart>
+           
+            {/* Bar Char */}
+            <BarChart
+              style={{ background: "black" }}
+              width={730}
+              height={250}
+              data={data1}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="miles" fill="#8884d8" />
+              <Bar dataKey="rating" fill="#82ca9d" />
+            </BarChart>
+            </div>
+        
+          {/* Search Form that searchs  returns data in CSV File */}
+          {/* <FormControl
+        type="text"
+        placeholder="Search"
+        className="mr-sm-2"
+        onChange={handleFilterChange}
+      /> */}
+
           {/* Pie Chart */}
-          <div
-            style={{
-              width: "100%", // Use 100% so it uses the full width of its container
-              height: "50vh", // Use viewport height (vh) so it responds to the height of the screen
-              margin: "0 auto", // This will center the div horizontally
-            }}
-          >
+          <div style={{ width: "70%" }}>
             <Pie
               data={chartData}
               options={{
@@ -169,15 +297,13 @@ function ResponsiveExample() {
             />
           </div>
 
-          {/* end pir chart */}
 
-          {/* Search Form that searchs  returns data in CSV File */}
-          {/* <FormControl
-        type="text"
-        placeholder="Search"
-        className="mr-sm-2"
-        onChange={handleFilterChange}
-      /> */}
+
+
+          </div>
+                )}
+
+          {/* end pir chart */}
 
           {/* Search Button */}
           {/* <Button variant="outline-success" onClick={fetchAndSetData}>
