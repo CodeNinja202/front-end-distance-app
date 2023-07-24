@@ -157,6 +157,12 @@ function ResponsiveExample() {
       
     },
     {
+      name: "Summerfield",
+      miles: 2.8 ,
+      rating: 100,
+      
+    },
+    {
       name: "Whitetail",
       miles: 	304 ,
       rating: 100,
@@ -174,12 +180,7 @@ function ResponsiveExample() {
       rating: 85,
       
     },
-    {
-      name: "Summerfield",
-      miles: 2.8 ,
-      rating: 100,
-      
-    },
+   
   
   ];
   return (
